@@ -1,16 +1,14 @@
 <?php
 
+use App\Post;
+use App\Category;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Http;
 
 Route::get('/', function () {
-    // https://laravel.com/docs/helpers#fluent-strings
-    $user = \App\User::find(2);
-
-    $name = '   name : ' . $user->name;
-    return \Illuminate\Support\Str::of($name)->trim()->ucfirst()->camel()->__toString();
+    return view('welcome');
 });
 
-Auth::routes();
+Route::get('/categories/{category}/posts/{post:id}', function (Category $category, Post $post) {
+    return $post;
+})->name('post.show');
 
-Route::get('/home', 'HomeController@index')->name('home');
